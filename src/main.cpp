@@ -13,13 +13,7 @@ int main(int argc, char *args[]) {
     auto game = corundum::Game{};
 
     game.initialize(corundum::WINDOW_WIDTH, corundum::WINDOW_HEIGHT);
-
-    while (game.isRunning()) {
-        game.processInput();
-        game.update();
-        game.render();
-    }
-
+    game.runLoop();
     game.destroy();
 
     return 0;

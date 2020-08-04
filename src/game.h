@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "ticks.h"
 #include <SDL2/SDL.h>
 
 namespace corundum {
@@ -17,14 +18,17 @@ namespace corundum {
         ~Game();
         [[nodiscard]] bool isRunning() const;
         void initialize(int width, int height);
-        void processInput();
-        void update();
-        void render();
+        void runLoop();
         void destroy();
 
       private:
         bool gameIsRunning;
         SDL_Window* window;
         SDL_Renderer* renderer;
+        Ticks ticks;
+
+        void processInput();
+        void update(float deltaTime);
+        void render();
     };
 }

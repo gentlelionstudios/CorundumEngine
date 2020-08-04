@@ -12,8 +12,8 @@
 namespace corundum {
     float projectilePosX = 0.0f;
     float projectilePosY = 0.0f;
-    float projectileVelX = 0.1f;
-    float projectileVelY = 0.1f;
+    float projectileVelX = 20.0f;
+    float projectileVelY = 30.0f;
 
     Game::Game() {
         gameIsRunning = false;
@@ -67,9 +67,9 @@ namespace corundum {
         }
     }
 
-    void Game::update() {
-        projectilePosX += projectileVelX;
-        projectilePosY += projectileVelY;
+    void Game::update(float deltaTime) {
+        projectilePosX += projectileVelX * deltaTime;
+        projectilePosY += projectileVelY * deltaTime;
     }
 
     void Game::render() {
@@ -88,5 +88,14 @@ namespace corundum {
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_Quit();
+    }
+
+    void Game::runLoop() {
+        while (isRunning()) {
+            ticks.nextFrame();
+            processInput();
+            update(ticks.getDeltaTime());
+            render();
+        }
     }
 }
