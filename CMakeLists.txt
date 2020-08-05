@@ -20,6 +20,8 @@ conan_add_remote(
 conan_cmake_run(
         REQUIRES
         doctest/[>=2.4.0]
+        fmt/7.0.2
+        glm/0.9.9.8
         libpng/1.6.37
         zlib/1.2.11
         bzip2/1.0.8
