@@ -34,9 +34,9 @@ namespace corundum {
         }
 
         std::string toString() {
-            std::string s = fmt::format("projectile: x={}, y={}\n", position.x, position.y);
-            s += fmt::format("velocity: x={}, y={}\n", velocity.x, velocity.y);
-            return s;
+            return fmt::format("projectile: x={}, y={}\n"
+                               "velocity: x={}, y={}\n",
+                               position.x, position.y, velocity.x, velocity.y);
         }
 
       private:
