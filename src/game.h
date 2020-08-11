@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "entity_manager.h"
 #include "ticks.h"
 #include <SDL2/SDL.h>
 
@@ -22,13 +23,15 @@ namespace corundum {
         void destroy();
 
       private:
+        void processInput();
+        void update(float deltaTime);
+        void render();
+        void loadLevel();
+
         bool gameIsRunning;
         SDL_Window* window;
         SDL_Renderer* renderer;
         Ticks ticks;
-
-        void processInput();
-        void update(float deltaTime);
-        void render();
+        EntityManager manager;
     };
 }

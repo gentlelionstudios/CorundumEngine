@@ -7,45 +7,11 @@
  */
 
 #include "game.h"
+#include "components/transform_component.h"
 #include <fmt/core.h>
-#include <glm/glm.hpp>
 #include <iostream>
 
 namespace corundum {
-    class Projectile {
-      public:
-        Projectile(float posX, float posY, float velX, float velY) {
-            position = glm::vec2(posX, posY);
-            velocity = glm::vec2(velX, velY);
-        }
-        ~Projectile() = default;
-
-        void move(float deltaTime) {
-            position =
-                glm::vec2(position.x + velocity.x * deltaTime, position.y + velocity.y * deltaTime);
-        }
-
-        [[nodiscard]] float getX() const {
-            return position.x;
-        }
-
-        [[nodiscard]] float getY() const {
-            return position.y;
-        }
-
-        std::string toString() {
-            return fmt::format("projectile: x={}, y={}\n"
-                               "velocity: x={}, y={}\n",
-                               position.x, position.y, velocity.x, velocity.y);
-        }
-
-      private:
-        glm::vec2 position;
-        glm::vec2 velocity;
-    };
-
-    Projectile projectile {0.0f, 0.0f, 20.0f, 20.0f};
-
     Game::Game() {
         gameIsRunning = false;
         window        = nullptr;
@@ -75,9 +41,9 @@ namespace corundum {
             return;
         }
 
-        gameIsRunning = true;
+        loadLevel();
 
-        fmt::print(projectile.toString());
+        gameIsRunning = true;
     }
 
     void Game::processInput() {
@@ -101,17 +67,17 @@ namespace corundum {
     }
 
     void Game::update(float deltaTime) {
-        projectile.move(deltaTime);
+        manager.update(deltaTime);
     }
 
     void Game::render() {
         SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
         SDL_RenderClear(renderer);
 
-        SDL_Rect sdlProjectile = {(int)projectile.getX(), (int)projectile.getY(), 10, 10};
+        if (manager.empty())
+            return;
 
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        SDL_RenderFillRect(renderer, &sdlProjectile);
+        manager.render(renderer);
 
         SDL_RenderPresent(renderer);
     }
@@ -129,5 +95,12 @@ namespace corundum {
             update(ticks.getDeltaTime());
             render();
         }
+    }
+
+    void Game::loadLevel() {
+        auto entity    = manager.addEntity("projectile");
+        auto component = std::make_shared<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+        fmt::print(component->toString());
+        entity->addComponent(component);
     }
 }
