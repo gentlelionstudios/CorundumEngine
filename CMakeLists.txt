@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.17)
 project(corundum VERSION 0.0.1 LANGUAGES CXX)
 
+# Require C++20 and disable extensions for all targets
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 if (NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
