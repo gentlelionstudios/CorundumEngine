@@ -19,7 +19,7 @@ namespace crn {
 
         Vector2& normalize();
 
-        float magnitude() const;
+        [[nodiscard]] float magnitude() const;
 
     };
 

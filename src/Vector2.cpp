@@ -19,6 +19,6 @@ crn::Vector2 &crn::Vector2::normalize() {
  * |V| = sqrt( x^2 + y^2 )
  */
 
-float crn::Vector2::magnitude() const {
+inline float crn::Vector2::magnitude() const {
     return static_cast<float>(sqrt(pow(x_comp, 2) + pow(y_comp, 2)));
 }
