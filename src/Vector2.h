@@ -19,7 +19,7 @@ namespace crn {
 
         Vector2& normalize();
 
-        inline float magnitude() const;
+        float magnitude() const;
 
     };
 

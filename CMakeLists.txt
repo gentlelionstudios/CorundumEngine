@@ -3,8 +3,11 @@ project(CorundumEngine)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(CorundumEngine main.cpp ${Physics})
+add_executable(CorundumEngine main.cpp)
+
+target_link_libraries(CorundumEngine Physics)
 
 add_subdirectory(src)
 add_subdirectory(dependencies)
 add_subdirectory(testing)
+
