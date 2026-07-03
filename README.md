@@ -1,3 +1,9 @@
+## Archived
+
+This repository is kept for historical reference only.
+
+Active development has moved to: https://github.com/corundumengine/
+
 <p align="center">
   <img width="300" src="resources/branding/corundum_logo_color.png" alt="Corundum">
 </p>
